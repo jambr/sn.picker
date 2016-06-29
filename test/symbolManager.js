@@ -1,6 +1,6 @@
 'use strict';
 let SymbolManager = require('../lib/symbolManager');
-let KeyValueStore = require('sn.core').KeyValueStore;
+let KeyValueStore = require('sn.core').Default.Store;
 
 let should = require('should');
 
