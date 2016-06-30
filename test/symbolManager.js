@@ -1,19 +1,25 @@
 'use strict';
 let SymbolManager = require('../lib/symbolManager');
 let KeyValueStore = require('sn.core').Default.Store;
+let Broker = require('sn.core').Default.Broker;
 
 let should = require('should');
 
 describe('Symbol Manager', () => {
-  let store, symbolManager;
-
+  let store, symbolManager, broker;
   before(() => {
     store = new KeyValueStore('sn:picker:symbols');
-    symbolManager = new SymbolManager(store);
+    broker = new Broker('sn:picker:testing');
+    symbolManager = new SymbolManager(store, broker);
   });
 
-  beforeEach(() => {
+  beforeEach(done => {
     store.flush();
+    broker.reset(done);
+  });
+
+  afterEach(done => {
+    broker.reset(done);
   });
 
   it('Should add symbols', (done) => {
@@ -47,4 +53,27 @@ describe('Symbol Manager', () => {
 
     symbolManager.add('LON', 'VM', nowRemoveIt);
   });
+
+  describe('Messaging', () => {
+    it('Should publish a message on adding a symbol', (done) => {
+      // Setup a queue which subscribes to the messages
+      broker.subscribe('sn.picker.symbol.create', (message) => {
+        message.exchange.should.eql('LON');
+        message.symbol.should.eql('VM');
+        done();
+      }, () => { 
+        symbolManager.add('LON', 'VM', () => {});
+      });
+    });
+    it('Should publish a message on deleting a symbol', (done) => {
+      // Setup a queue which subscribes to the messages
+      broker.subscribe('sn.picker.symbol.delete', (message) => {
+        message.should.eql('LON:VM');
+        done();
+      }, () => { 
+        symbolManager.remove('LON', 'VM', () => {});
+      });
+    });
+  });
+
 });
