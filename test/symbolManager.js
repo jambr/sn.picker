@@ -70,8 +70,7 @@ describe('Symbol Manager', () => {
     it('Should publish a message on adding a symbol', (done) => {
       // Setup a queue which subscribes to the messages
       broker.subscribe('sn.picker.symbol.create', (message) => {
-        message.exchange.should.eql('LON');
-        message.symbol.should.eql('VM');
+        message.id.should.eql('LON:VM');
         done();
       }, () => { 
         symbolManager.add('LON', 'VM', () => {});
@@ -80,7 +79,7 @@ describe('Symbol Manager', () => {
     it('Should publish a message on deleting a symbol', (done) => {
       // Setup a queue which subscribes to the messages
       broker.subscribe('sn.picker.symbol.delete', (message) => {
-        message.should.eql('LON:VM');
+        message.id.should.eql('LON:VM');
         done();
       }, () => { 
         symbolManager.remove('LON', 'VM', () => {});
