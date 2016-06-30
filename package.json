@@ -41,6 +41,7 @@
   },
   "keywords": [],
   "dependencies": {
+    "debug": "^2.2.0",
     "sn.core": "../sn.core"
   }
 }
