@@ -37,18 +37,6 @@ describe('Symbol Manager', () => {
     symbolManager.add('LON', 'VM', symbolAdded);
   });
 
-  it('Should not add symbols which are already added', (done) => {
-    let symbolAdded = (err) => {
-      should.ifError(err);
-      symbolManager.add('LON', 'VM', (err) => {
-        should(err).not.eql(null);
-        done();
-      });
-    };
-
-    symbolManager.add('LON', 'VM', symbolAdded);
-  });
-
   it('Should remove symbols', (done) => {
     let validateItDoesntExist = (err) => {
       should.ifError(err);
