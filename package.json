@@ -25,7 +25,8 @@
     "node": ">= 5.10.1"
   },
   "scripts": {
-    "test": "grunt mochaTest"
+    "test": "grunt mochaTest",
+    "start": "node index.js"
   },
   "devDependencies": {
     "deride": "^0.5.4",
