@@ -64,7 +64,7 @@ describe('Server', () => {
   });
 
   it('deleting a symbol that doesnt exist should return bad request', (done) => {
-    mockSymbolManager.setup.get.toCallbackWith(null, undefined);
+    mockSymbolManager.setup.get.toCallbackWith(null, null);
     client.del('/symbol/LON/VM', (err, req, res) => {
       should(err).not.eql(null, 'BadRequest error was not returned');
       should(res.statusCode).eql(400);
