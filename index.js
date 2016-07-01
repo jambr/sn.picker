@@ -6,7 +6,7 @@ let Broker = require('sn.core').Default.Broker;
 
 let store, symbolManager, broker, app;
 store = new KeyValueStore('sn:picker:symbols');
-broker = new Broker('stocknet.topic');
+broker = new Broker('sn:topic');
 symbolManager = new SymbolManager(store, broker);
 app = new App(8001, symbolManager);
 
