@@ -46,6 +46,7 @@
   },
   "keywords": [],
   "dependencies": {
+    "async": "^2.0.0-rc.6",
     "sn.core": "jambr/sn.core.git#master"
   }
 }
