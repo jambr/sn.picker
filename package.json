@@ -22,10 +22,10 @@
   ],
   "main": "index.js",
   "engines": {
-    "node": ">= 5.10.1"
+    "node": ">= 6.2.2"
   },
   "scripts": {
-    "test": "grunt ci",
+    "test": "./node_modules/grunt/bin/grunt ci",
     "start": "node index.js"
   },
   "devDependencies": {
