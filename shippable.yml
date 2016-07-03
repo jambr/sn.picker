@@ -14,7 +14,8 @@ services:
 build:
   pre_ci:
     - docker build -t $REGISTRY/$SERVICE:latest .
-  ci: 
+  ci:
+    - npm install 
     - npm run test 
   push:
     - docker tag -f $REGISTRY/$SERVICE:latest $REGISTRY/$SERVICE:$BRANCH.$BUILD_NUMBER
