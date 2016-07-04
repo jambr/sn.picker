@@ -12,6 +12,10 @@ broker = new Broker('sn:topic', config.rabbitmq);
 symbolManager = new SymbolManager(store, broker);
 app = new App(8001, symbolManager);
 
-app.start(() => {
+app.start((err) => {
+  if(err) {
+    console.log(err);
+    process.exit(1);
+  }
   console.log('sn.picker started');
 });
